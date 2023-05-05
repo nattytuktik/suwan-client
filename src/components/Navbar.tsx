@@ -16,8 +16,8 @@ const naigationLinkes = [
   },
 
   {
-    name: "Contact",
-    href: "/contact",
+    name: "Login",
+    href: "/login",
   }
 ]
 
@@ -66,7 +66,7 @@ function Navbar({}: Props) {
 
         {toggle ? (
           <section className="transition-all delay-300 shadow-md shadow-slate-200">
-            <ul className="divide-y divide-solid flex flex-col">
+            <ul className=" flex flex-col">
               {naigationLinkes.map((nav) => {
                 return (
                   <li className="pt-2" key={nav.name}>

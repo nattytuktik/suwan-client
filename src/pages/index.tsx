@@ -24,12 +24,14 @@ export default function Home() {
   const [sect2, setSection2] = useState([]);
   useEffect(() => {
     (async() => {
-      const test = (await getDataFetch('mitor-room'));
+      const test = (await getDataFetch('room'));
       const sects = await test.json();
-      setSection1(sects.sect1);
-      setSection2(sects.sect2);
+      setSection1(sects);
+  
     })();
   }, []);
+
+  console.log(sect1)
   return (
     <main className="">
       <Layout>
