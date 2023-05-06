@@ -15,6 +15,7 @@ import Layout from "@/components/layout/Layout";
 import CardTitle from "@/components/customer/CardTitle";
 import getDataFetch from "@/fetch/getdatafetch";
 import Section from "@/components/section/Section";
+import authTimeToken from "@/fetch/auth/authTimeToken";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,12 +27,10 @@ export default function Home() {
     (async() => {
       const test = (await getDataFetch('room'));
       const sects = await test.json();
-      setSection1(sects);
-  
+      setSection1(sects.sect1);
+      setSection2(sects.sect2);
     })();
   }, []);
-
-  console.log(sect1)
   return (
     <main className="">
       <Layout>
@@ -48,7 +47,7 @@ export default function Home() {
           </div>
 
           {/* value out for seclect defaut is section = 1, foor = 1 */}
-          <div className="mt-10">
+          {/* <div className="mt-10">
             {
               tebSection === 1 ? 
               (<div>
@@ -56,7 +55,7 @@ export default function Home() {
               </div>):
               null
             }
-          </div>
+          </div> */}
         </div>
       </Layout>
     </main>

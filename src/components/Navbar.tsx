@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Text, Icon } from "@tremor/react";
 import { CashIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import authTimeToken from "@/fetch/auth/authTimeToken";
 type Props = {};
 
 const naigationLinkes = [
@@ -23,6 +24,17 @@ const naigationLinkes = [
 
 function Navbar({}: Props) {
   const [toggle, setToggle] = useState(false);
+  const [authState, setAuth] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      if ((await authTimeToken())) {
+        setAuth(true)
+      }else {
+        setAuth(false)
+      }
+    })();
+  }, [])
   return (
     <div>
       <nav>
