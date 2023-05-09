@@ -11,8 +11,8 @@ const routeAdmin = [
         path: "/createRoom"
     },
     {   
-        text: "create",
-        path: "/create"
+        text: "mitor",
+        path: "/putMitor"
     },
     {   
         text: "create",

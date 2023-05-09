@@ -1,6 +1,7 @@
 import Layout from "@/components/layout/Layout";
-import { TextInput, SelectBox, SelectBoxItem } from "@tremor/react";
-import React, { ChangeEvent, useRef, useState } from "react";
+import authTimeToken from "@/fetch/auth/authTimeToken";
+import { TextInput, SelectBox, SelectBoxItem, Button } from "@tremor/react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
 type Props = {};
 
@@ -10,10 +11,20 @@ function CreateRoom({}: Props) {
   const [section, setSection] = useState(1);
   const [mitorNumber, setMitor] = useState();
   const [timeEdit, setTimeEdit] = useState(new Date());
-
   const [roomValid, setRoomValid] = useState(true);
 
-  const submitHandler = (e: any) => {
+  useEffect(() => {
+    (async () => {
+
+      // const validToken = await authTimeToken();
+
+      // if (!validToken) {
+      //   window.location.href = '/login'
+      // }
+    })();
+  })
+
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (room === 0 && section === 2) {
@@ -22,7 +33,7 @@ function CreateRoom({}: Props) {
 
     if (roomValid) {
       const token = localStorage.getItem("token");
-      const createRoomPostRequest = fetch("http://localhost:5001/room", {
+      const createRoomPostRequest = await fetch("http://localhost:5001/room", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -37,13 +48,16 @@ function CreateRoom({}: Props) {
           },
 
           mitor: {
-            num: 3423,
+            num: 2222,
             time_edit: new Date(),
             status: true,
           },
         }),
       });
+
+      console.log(await createRoomPostRequest.json())
     }
+
   };
 
   const roomChange = (e: any) => {
@@ -67,7 +81,7 @@ function CreateRoom({}: Props) {
           </header>
         </div>
         <div className="p-2">
-          <form>
+          <form onSubmit={submitHandler}>
             <div className="grid">
               <div>
                 <label>ห้อง</label>
@@ -107,6 +121,15 @@ function CreateRoom({}: Props) {
                   <SelectBoxItem value="2" />
                 </SelectBox>
               </div>
+
+              <div>
+                <label>เลขมิเตอร์</label>
+                <input className="border rounded-lg focus:outline-none" type="number" max={9999} />
+              </div>
+
+              <Button type="submit">
+                create
+              </Button>
             </div>
           </form>
         </div>
