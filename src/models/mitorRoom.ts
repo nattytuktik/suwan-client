@@ -5,6 +5,13 @@ export interface MiterRoom {
     room: number;
     foor: number;
     section: number;
-    mitor: any;
-    customers: Array<any>;
+    mitor_id: string;
+    current_month: {
+        num: number,
+        time_edit: string
+    }
+    last_month: {
+        num: number,
+        time_edit: string
+    }
 }
